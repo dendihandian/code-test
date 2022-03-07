@@ -14,7 +14,10 @@ class Post extends Model
         'updated_at' => 'datetime:Y-m-d H:i:s',
     ];
 
-    protected $hidden = ['updated_at'];
+    protected $hidden = [
+        'updated_at',
+        'user_id',
+    ];
 
     public function author()
     {
