@@ -35,4 +35,11 @@ class User extends Authenticatable
             ->where('created_at', '>=', Carbon::now()->subWeek()->toDateTimeString())
             ->orderByDesc('created_at');
     }
+
+    public function latest_post()
+    {
+        return $this->hasOne(Post::class)
+            ->where('created_at', '>=', Carbon::now()->subWeek()->toDateTimeString())
+            ->orderByDesc('created_at');
+    }
 }

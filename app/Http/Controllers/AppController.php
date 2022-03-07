@@ -14,11 +14,15 @@ class AppController extends Controller
 
         if (!$topUsersData) {
             $topUsersData = User::query()
-                ->with('latest_posts')
-                ->withCount('posts')
+                ->with([
+                    'latest_post' => function($query) {
+                        $query->select('user_id', 'created_at', 'title');
+                    },
+                ])
+                ->withCount(['posts', 'latest_posts'])
                 ->get()
                 ->filter(function($user){
-                    return $user->latest_posts->count() > 10;
+                    return $user->latest_posts_count > 10;
                 })
                 ->transform(function($user){
                     return [
@@ -26,7 +30,7 @@ class AppController extends Controller
                         'total_posts_count' => $user->posts_count,
                         'last_post_title' => $user->latest_posts->first()->title,
                     ];
-                });
+                })->values();
 
             Cache::put('topUsersData', $topUsersData, now()->addMinutes(30));
         }
