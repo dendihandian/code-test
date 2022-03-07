@@ -9,6 +9,13 @@ class Post extends Model
 {
     use HasFactory;
 
+    protected $casts = [
+        'created_at' => 'datetime:Y-m-d H:i:s',
+        'updated_at' => 'datetime:Y-m-d H:i:s',
+    ];
+
+    protected $hidden = ['updated_at'];
+
     public function author()
     {
         return $this->belongsTo(User::class, 'user_id');
