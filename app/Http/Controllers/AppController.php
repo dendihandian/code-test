@@ -14,6 +14,7 @@ class AppController extends Controller
 
         if (!$topUsersData) {
             $topUsersData = User::query()
+                ->select('id', 'username')
                 ->with([
                     'latest_post' => function($query) {
                         $query->select('user_id', 'created_at', 'title');
