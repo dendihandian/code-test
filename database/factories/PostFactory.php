@@ -3,9 +3,8 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
 
-class UserFactory extends Factory
+class PostFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -15,7 +14,8 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
-            'username' => Str::snake($this->faker->unique()->name()),
+            'title' => $this->faker->sentences(3, true),
+            'user_id' => fn () => UserFactory::new()->create()->id,
         ];
     }
 }
@@ -23,7 +23,6 @@ class UserFactory extends Factory
 /**
  * quick use with tinker:
  * 
- * \Database\Factories\UserFactory::new()->create()
- * \Database\Factories\UserFactory::times(3)->create()
+ * \Database\Factories\PostFactory::new()->create()
+ * \Database\Factories\PostFactory::times(3)->create()
  */
-
