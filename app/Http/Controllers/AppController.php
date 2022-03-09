@@ -28,7 +28,7 @@ class AppController extends Controller
                 ->transform(function($user){
                     return [
                         'username' => $user->username,
-                        'total_posts_count' => $user->posts_count,
+                        'total_posts_count' => (int) $user->posts_count,
                         'last_post_title' => $user->latest_posts->first()->title,
                     ];
                 })->values();

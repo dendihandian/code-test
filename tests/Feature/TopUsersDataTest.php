@@ -2,16 +2,19 @@
 
 namespace Tests\Feature;
 
-use Carbon\Carbon;
+use Illuminate\Support\Carbon;
 use Database\Factories\PostFactory;
 use Database\Factories\UserFactory;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class TopUsersDataTest extends TestCase
 {
+    use DatabaseMigrations;
+
     /**
-     * A basic test example.
+     * test_top_users_data_should_valid.
      *
      * @return void
      */
